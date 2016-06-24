@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="content">
+            <div class="row">
+                <div class="col-md-8  ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-6"> Contacts</div>
+                                <div class="col-xs-6 text-right"><h:form>
+                                    <h:commandButton action="#{contactBean.createNew}" value="+"
+                                                     styleClass="btn btn-sm btn-success">
+                                    </h:commandButton>
+                                </h:form></div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h:form id="contactsTable">
+                                <h:dataTable value="#{contactBean.contacts}" var="contact"
+                                             styleClass="table">
+                                    <h:column>
+                                        <f:facet name="header">Id</f:facet>
+                                        #{contact.id}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Name</f:facet>
+                                        #{contact.name}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Number</f:facet>
+                                        #{contact.number}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Action</f:facet>
+                                        <h:commandButton action="#{contactBean.edit}" value="Edit"
+                                                         styleClass="btn btn-sm btn-info">
+                                            <f:param name="id" value="#{contact.id}"></f:param>
+                                        </h:commandButton>
+
+                                        <h:commandButton action="#{contactBean.remove}" value="Remove"
+                                                         styleClass="btn btn-sm btn-info">
+                                            <f:param name="id" value="#{contact.id}"></f:param>
+                                        </h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h:form id="entityForm">
+                        <h:panelGroup rendered="#{contactBean.contact!=null}">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"> #{contactBean.contact.id!=null ? "Edit: ".concat(contactBean.contact.name) : "Create new"} </div>
+                                <div class="panel-body">
+                                    <h:panelGroup styleClass="form-group"
+                                                  rendered="#{contactBean.contact.id!=null}">
+                                        <h:outputLabel>Id</h:outputLabel>&nbsp;
+                                        <h:outputText
+                                                value="#{contactBean.contact.id}"></h:outputText>
+                                    </h:panelGroup>
+
+                                    <div class="form-group">
+                                        <h:outputLabel>Name</h:outputLabel>
+                                        <h:inputText id="name"
+                                                     styleClass="form-control"
+                                                     value="#{contactBean.contact.name}"></h:inputText>
+                                        <h:message for="name" errorClass="has-error"/>
+                                    </div>
+                                    <div class="form-group"><h:outputLabel>Number</h:outputLabel>
+                                        <h:inputText id="number"
+                                                     styleClass="form-control"
+                                                     value="#{contactBean.contact.number}" maxlength="9" size="6" validatorMessage="Value must contain only digits.">
+                                            <f:convertNumber longOnly="true" ></f:convertNumber>
+                                        </h:inputText>
+                                        <h:message for="number" errorClass="has-error"/>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <h:commandButton
+                                                styleClass="btn btn-sm btn-info"
+                                                value="Save"
+                                                action="#{contactBean.save}"></h:commandButton>
+                                        <h:commandLink action="#{contactBean.cancel}"
+                                                         styleClass="btn btn-sm btn-info"
+                                                         value="Cancel">
+                                        </h:commandLink></div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

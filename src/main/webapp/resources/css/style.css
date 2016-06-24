@@ -1,0 +1,4 @@
+table.table tr td.source, table.table tr th
+{
+    width: 150px;
+}

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:component="http://java.sun.com/jsf/composite/component"
+        >
+<h:body>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="content">
+
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Description</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Expresion</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Result</label>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Ajax
+                        </div>
+                        <div class="col-md-6">
+                             <pre>
+&lt;h:form id=&quot;ajaxForm&quot;&gt;
+    &lt;h:inputText id=&quot;exampleValue&quot;
+                 styleClass=&quot;form-control&quot;
+                 value=&quot;<strong>#{"#"}{</strong>otherBean.exampleValue<strong>}</strong>&quot;&gt;
+        &lt;f:ajax execute=&quot;@form&quot; render=&quot;ajaxForm&quot; event=&quot;keyup&quot;&gt;&lt;/f:ajax&gt;
+    &lt;/h:inputText&gt;
+
+    &lt;div&gt;
+        &lt;label&gt;Result: <strong>#{"#"}{</strong>otherBean.exampleValue<strong>}</strong>&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/h:form&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <h:form id="ajaxForm">
+                                <h:inputText id="exampleValue"
+                                             styleClass="form-control"
+                                             value="#{otherBean.exampleValue}">
+                                    <f:ajax execute="@form" render="outputlabel" event="keyup"></f:ajax>
+                                </h:inputText>
+
+                                <h:panelGrid id="outputlabel">
+                                    <label>Result: #{otherBean.exampleValue}</label>
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            Validation
+                        </div>
+                        <div class="col-md-6">
+                             <pre>
+&lt;h:form id=&quot;validationForm&quot;&gt;
+    &lt;h:inputText id=&quot;email&quot; styleClass=&quot;form-control&quot; value=&quot;<strong>#{"#"}{</strong>otherBean.email<strong>}</strong>&quot;&gt;
+        &lt;f:validator for=&quot;email&quot; validatorId=&quot;emailValidator&quot;&gt;&lt;/f:validator&gt;
+    &lt;/h:inputText&gt;
+    &lt;h:commandButton styleClass=&quot;btn btn-sm btn-info&quot; value=&quot;submit&quot;&gt;
+        &lt;f:ajax execute=&quot;@form&quot; render=&quot;validationForm&quot;&gt;&lt;/f:ajax&gt;
+    &lt;/h:commandButton&gt;
+    &lt;div&gt;
+        &lt;label&gt;Result: <strong>#{"#"}{</strong>otherBean.email<strong>}</strong>&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/h:form&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <h:form id="validationForm">
+                                <h:inputText id="email" styleClass="form-control" value="#{otherBean.email}">
+                                    <f:validator for="email" validatorId="emailValidator"></f:validator>
+                                </h:inputText>
+
+                                <h:commandButton styleClass="btn btn-sm btn-info" value="submit">
+                                    <f:ajax execute="@form" render="validationForm"></f:ajax>
+                                </h:commandButton>
+
+                                <div>
+                                    <h:message for="email"></h:message>
+                                </div>
+
+                                <div>
+                                    <label>Result: #{otherBean.email}</label>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Converter
+                        </div>
+                        <div class="col-md-6">
+                            <pre>
+&lt;h:form id=&quot;converterForm&quot;&gt;
+    &lt;h:inputText id=&quot;date&quot; styleClass=&quot;form-control&quot; value=&quot;<strong>#{"#"}{</strong>otherBean.date<strong>}</strong>&quot;&gt;
+        &lt;f:converter for=&quot;date&quot; converterId=&quot;dateConverter&quot;&gt;&lt;/f:converter&gt;
+    &lt;/h:inputText&gt;
+    &lt;h:commandButton styleClass=&quot;btn btn-sm btn-info&quot; value=&quot;submit&quot;  &gt;
+        &lt;f:ajax execute=&quot;@form&quot; render=&quot;converterForm&quot;&gt;&lt;/f:ajax&gt;
+    &lt;/h:commandButton&gt;
+    &lt;div&gt;
+        &lt;label&gt;Result: <strong>#{"#"}{</strong>otherBean.date<strong>}</strong>&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/h:form&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <h:form id="converterForm">
+                                <h:inputText id="date" styleClass="form-control" value="#{otherBean.date}">
+                                    <f:converter for="date" converterId="dateConverter"></f:converter>
+                                </h:inputText>
+
+                                <h:commandButton styleClass="btn btn-sm btn-info" value="submit">
+                                    <f:ajax execute="@form" render="converterForm"></f:ajax>
+                                </h:commandButton>
+
+                                <div><h:message for="date"></h:message></div>
+
+                                <div>
+                                    <label>Result: #{otherBean.date}</label>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            Loop
+                        </div>
+                        <div class="col-md-6">
+                            <pre>
+&lt;ui:repeat value=&quot;<strong>#{"#"}{</strong>otherBean.listOfValue<strong>}</strong>&quot; var=&quot;iteam&quot;&gt;
+    &lt;div&gt;<strong>#{"#"}{</strong>iteam<strong>}</strong>&lt;/div&gt;
+&lt;/ui:repeat&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <ui:repeat value="#{otherBean.listOfValue}" var="iteam">
+                                <div>#{iteam}</div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Select One Menu
+                        </div>
+                        <div class="col-md-6">
+                                <pre>
+&lt;h:form id=&quot;selectForm&quot;&gt;
+    &lt;h:selectOneMenu value=&quot;<strong>#{"#"}{</strong>otherBean.selectedValue<strong>}</strong>&quot; styleClass=&quot;form-control&quot;&gt;
+        &lt;f:selectItems itemValue=&quot;<strong>#{"#"}{</strong>iteam<strong>}</strong>&quot; itemLabel=&quot;<strong>#{"#"}{</strong>iteam<strong>}</strong>&quot; value=&quot;<strong>#{"#"}{</strong>otherBean.listOfValue<strong>}</strong>&quot; var=&quot;iteam&quot;/&gt;
+        &lt;f:selectItem itemValue=&quot;Other&quot; itemLabel=&quot;Other&quot;/&gt;
+        &lt;f:ajax execute=&quot;@form&quot; render=&quot;selectForm&quot; event=&quot;change&quot;&gt;&lt;/f:ajax&gt;
+    &lt;/h:selectOneMenu&gt;
+    &lt;div&gt;
+        &lt;label&gt;Result: <strong>#{"#"}{</strong>otherBean.selectedValue<strong>}</strong>&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/h:form&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <h:form id="selectForm">
+                                <h:selectOneMenu value="#{otherBean.selectedValue}" styleClass="form-control">
+                                    <f:selectItems itemValue="#{iteam}" itemLabel="#{iteam}" value="#{otherBean.listOfValue}" var="iteam"/>
+                                    <f:selectItem itemValue="Other" itemLabel="Other"/>
+                                    <f:ajax execute="@form" render="selectForm" event="change"></f:ajax>
+                                </h:selectOneMenu>
+
+                                <div>
+                                    <label>Result: #{otherBean.selectedValue}</label>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Composite Component
+                        </div>
+                        <div class="col-md-6">
+                            <label>JSFInputText.xhtml</label>
+                                <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+        &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+      xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+      xmlns:composite=&quot;http://java.sun.com/jsf/composite&quot;&gt;
+&lt;composite:interface&gt;
+    &lt;composite:attribute name=&quot;label&quot;/&gt;
+    &lt;composite:attribute name=&quot;value&quot;/&gt;
+    &lt;composite:attribute name=&quot;required&quot; type=&quot;java.lang.Boolean&quot; default=&quot;false&quot;/&gt;
+&lt;/composite:interface&gt;
+&lt;composite:implementation&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;h:outputLabel&gt;<strong>#{"#"}{</strong>cc.attrs.label<strong>}
+                                </strong><strong></strong>&lt;h:panelGroup rendered=&quot;<strong>#{"#"}{</strong>cc.attrs.required<strong>}</strong>&quot;&gt;&lt;label&gt; *&lt;/label&gt;&lt;/h:panelGroup&gt;
+        &lt;/h:outputLabel&gt;
+        &lt;h:inputText id=&quot;name&quot;
+                     styleClass=&quot;form-control&quot;
+                     required=&quot;<strong>#{"#"}{</strong>cc.attrs.required<strong>}</strong>&quot;
+                     value=&quot;<strong>#{"#"}{</strong>cc.attrs.value<strong>}</strong>&quot;&gt;&lt;/h:inputText&gt;
+        &lt;h:message for=&quot;name&quot; errorClass=&quot;has-error&quot;/&gt;
+    &lt;/div&gt;
+&lt;/composite:implementation&gt;
+&lt;/html&gt;
+</pre>
+
+                            <label>Used in view:</label>
+                                <pre>
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+      xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+      xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;
+      xmlns:f=&quot;http://java.sun.com/jsf/core&quot;
+      <span style="color:#FF0000"><strong>xmlns:JSF=&quot;http://java.sun.com/jsf/composite/JSF&quot;</strong></span>
+        &gt;
+...
+&lt;JSF:JSFInputText label=&quot;Name&quot; value=&quot;<strong>#{"#"}{</strong>otherBean.exampleValue.concat(&#39; first&#39;)<strong>}</strong>&quot; required=&quot;true&quot;&gt;&lt;/JSF:JSFInputText&gt;
+&lt;JSF:JSFInputText label=&quot;City&quot; value=&quot;<strong>#{"#"}{</strong>otherBean.exampleValue.concat(&#39; second&#39;)<strong>}</strong>&quot; required=&quot;false&quot;&gt;&lt;/JSF:JSFInputText&gt;
+                                </pre>
+                        </div>
+                        <div class="col-md-4">
+                            <component:JSFInputText label="Name" value="#{otherBean.ccTest1}" required="true"></component:JSFInputText>
+                            <component:JSFInputText label="City" value="#{otherBean.ccTest2}" required="false"></component:JSFInputText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

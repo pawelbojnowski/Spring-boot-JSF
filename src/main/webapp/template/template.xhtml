@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+<h:head>
+    <h:outputScript library="javax.faces" name="jsf.js" target="head"/>
+    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-theme.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="jQuery.js"/>
+    <h:outputScript library="js" name="bootstrap.js"/>
+
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <div id="header">
+            <ui:insert name="header">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1>Springboot + JSF 2.+</h1></div>
+                    <div class="col-md-2">
+                        <div class="text-right">
+                            <form action="/logout" method="post">
+                                <input type="submit" class="btn btn-default btn-sm" value="Sign Out"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li class="#{view.viewId == '/index.xhtml' ? 'active':''}"><a href="/index.jsf">Demo <span
+                                    class="sr-only">(current)</span></a></li>
+                            <li class="#{view.viewId == '/index-ajax.xhtml' ? 'active':''}"><a
+                                    href="/index-ajax.jsf">Demo Ajax </a></li>
+                            <li class="#{view.viewId == '/other.xhtml' ? 'active':''}"><a href="/other.jsf">Other </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </ui:insert>
+        </div>
+
+        <div id="content">
+            <ui:insert name="content">
+
+            </ui:insert>
+        </div>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <hr></hr>
+                <div class="text-center"><h5>#Java #Spring boot #JSF</h5></div>
+            </ui:insert>
+        </div>
+    </div>
+
+</h:body>
+</html>
